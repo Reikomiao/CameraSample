@@ -118,6 +118,7 @@
     hintLable.textAlignment = NSTextAlignmentCenter;
     hintLable.transform = CGAffineTransformMakeRotation(M_PI/2);
     hintLable.translatesAutoresizingMaskIntoConstraints = NO;
+    hintLable.text = @"请保持图像在中间";
     [backView addSubview:hintLable];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:hintLable attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:leftImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:hintLable attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:leftImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
