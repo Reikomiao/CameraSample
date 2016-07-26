@@ -84,11 +84,25 @@
     // 上面的阴影部分
     UIImageView *topImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow"]];
     topImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    topImageView.userInteractionEnabled = YES;
     [backView addSubview:topImageView];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:topImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:backView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:topImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:backView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:topImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:backView attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:topImageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.apertureImageView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    // 闪光灯
+    UIButton *flashLampButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [flashLampButton setImage:[UIImage imageNamed:@"autolight"] forState:UIControlStateNormal];
+    [flashLampButton setTitle:@"自动" forState:UIControlStateNormal];
+    flashLampButton.translatesAutoresizingMaskIntoConstraints = NO;
+    flashLampButton.userInteractionEnabled = YES;
+    [flashLampButton addTarget:self action:@selector(actionFlashLampButton:) forControlEvents:UIControlEventTouchUpInside];
+    [topImageView addSubview:flashLampButton];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeRight multiplier:1 constant:-5]];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeHeight multiplier:0.8 constant:0]];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]];
+    
     // 右边的阴影部分
     UIImageView *leftImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow"]];
     leftImageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -118,7 +132,6 @@
     hintLable.textAlignment = NSTextAlignmentCenter;
     hintLable.transform = CGAffineTransformMakeRotation(M_PI/2);
     hintLable.translatesAutoresizingMaskIntoConstraints = NO;
-    hintLable.text = @"请保持图像在中间";
     [backView addSubview:hintLable];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:hintLable attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:leftImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [backView addConstraint:[NSLayoutConstraint constraintWithItem:hintLable attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:leftImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -169,6 +182,8 @@
     [takePhoneView addConstraint:[NSLayoutConstraint constraintWithItem:rotateButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:takePhoneButton attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
     [takePhoneView addConstraint:[NSLayoutConstraint constraintWithItem:rotateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50]];
    
+    
+   
 }
 // 初始化相机
 - (void)initAVCaptureSession{
@@ -211,14 +226,13 @@
 }
 // 拍照的按钮
 - (void)actionTakePhone:(UIButton *)sender {
-    
     AVCaptureConnection *stillImageConnection = [self.stillImageOutput        connectionWithMediaType:AVMediaTypeVideo];
     UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
     AVCaptureVideoOrientation avcaptureOrientation = [self avOrientationForDeviceOrientation:curDeviceOrientation];
     [stillImageConnection setVideoOrientation:avcaptureOrientation];
     [stillImageConnection setVideoScaleAndCropFactor:self.effectiveScale];
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-        if (!error) {
+        if (imageDataSampleBuffer) {
             NSData *jpegData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
             //原始的图片
             UIImage *originalImage = [UIImage imageWithData:jpegData];
@@ -227,30 +241,71 @@
             }
             
             /*
-            // 如果要求拍摄的图片保存到相册里就打开以下的代码
-            CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,imageDataSampleBuffer,kCMAttachmentMode_ShouldPropagate);
-            
-            ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-            if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied){
-                //无权限
-                return ;
-            }
-            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-            [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
-                
-            }];
+             // 如果要求拍摄的图片保存到相册里就打开以下的代码
+             CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,imageDataSampleBuffer,kCMAttachmentMode_ShouldPropagate);
+             
+             ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+             if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied){
+             //无权限
+             return ;
+             }
+             ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+             [library writeImageDataToSavedPhotosAlbum:jpegData metadata:(__bridge id)attachments completionBlock:^(NSURL *assetURL, NSError *error) {
+             
+             }];
              */
         }else{
             /**
              *  相机初始化失败,会dismiss
              */
+            NSLog(@"==%@",error);
+            
         }
-    }];
-    [_session stopRunning];
-    sleep(1);// 这个为了显示效果,可以删除
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
 
+
+
+    }];
+//    sleep(1);// 这个为了显示效果,可以删除
+
+}
+// 闪光灯
+- (void)actionFlashLampButton:(UIButton *)button{
+    
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    //修改前必须先锁定
+    [device lockForConfiguration:nil];
+    //必须判定是否有闪光灯，否则如果没有闪光灯会崩溃
+    if ([device hasFlash]) {
+        
+        if (device.flashMode == AVCaptureFlashModeOff) {
+            device.flashMode = AVCaptureFlashModeOn;
+            [button setTitle:@"-开-" forState:UIControlStateNormal];
+            
+        } else if (device.flashMode == AVCaptureFlashModeOn) {
+            device.flashMode = AVCaptureFlashModeAuto;
+            [button setTitle:@"自动" forState:UIControlStateNormal];
+
+        } else if (device.flashMode == AVCaptureFlashModeAuto) {
+            device.flashMode = AVCaptureFlashModeOff;
+            [button setTitle:@"-关-" forState:UIControlStateNormal];
+
+        }
+        
+    } else {
+        
+        NSLog(@"设备不支持闪光灯");
+    }
+    [device unlockForConfiguration];
+}
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
 - (AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation
 {
     AVCaptureVideoOrientation result = (AVCaptureVideoOrientation)deviceOrientation;
@@ -318,20 +373,15 @@
             break;
         }
     }
-    
     if ( allTouchesAreOnThePreviewLayer ) {
-        
         
         self.effectiveScale = self.beginGestureScale * recognizer.scale;
         if (self.effectiveScale < 1.0){
             self.effectiveScale = 1.0;
         }
         
-        NSLog(@"%f-------------->%f------------recognizerScale%f",self.effectiveScale,self.beginGestureScale,recognizer.scale);
-        
         CGFloat maxScaleAndCropFactor = [[self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo] videoMaxScaleAndCropFactor];
         
-        NSLog(@"%f",maxScaleAndCropFactor);
         if (self.effectiveScale > maxScaleAndCropFactor)
             self.effectiveScale = maxScaleAndCropFactor;
         

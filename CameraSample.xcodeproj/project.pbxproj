@@ -9,15 +9,18 @@
 /* Begin PBXBuildFile section */
 		540908DC1D40763A0094D368 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908DB1D40763A0094D368 /* main.m */; };
 		540908DF1D40763A0094D368 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908DE1D40763A0094D368 /* AppDelegate.m */; };
-		540908E21D40763A0094D368 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908E11D40763A0094D368 /* ViewController.m */; };
 		540908E51D40763A0094D368 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540908E31D40763A0094D368 /* Main.storyboard */; };
 		540908E71D40763A0094D368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 540908E61D40763A0094D368 /* Assets.xcassets */; };
 		540908EA1D40763A0094D368 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540908E81D40763A0094D368 /* LaunchScreen.storyboard */; };
 		540908F51D40763A0094D368 /* CameraSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908F41D40763A0094D368 /* CameraSampleTests.m */; };
 		540909001D40763A0094D368 /* CameraSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908FF1D40763A0094D368 /* CameraSampleUITests.m */; };
-		540909101D4076960094D368 /* RCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5409090F1D4076960094D368 /* RCustomViewController.m */; };
-		540909121D407E290094D368 /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 540909111D407E290094D368 /* takephoto.png */; };
-		540909141D407E370094D368 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 540909131D407E370094D368 /* shadow.png */; };
+		54FE5CD41D47100800250961 /* RCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FE5CCB1D47100800250961 /* RCustomViewController.m */; };
+		54FE5CD51D47100800250961 /* autolight.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CCD1D47100800250961 /* autolight.png */; };
+		54FE5CD61D47100800250961 /* closelight.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CCE1D47100800250961 /* closelight.png */; };
+		54FE5CD71D47100800250961 /* openlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CCF1D47100800250961 /* openlight.png */; };
+		54FE5CD81D47100800250961 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CD01D47100800250961 /* shadow.png */; };
+		54FE5CD91D47100800250961 /* takephoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CD11D47100800250961 /* takephoto.png */; };
+		54FE5CDA1D47100800250961 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FE5CD31D47100800250961 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,8 +45,6 @@
 		540908DB1D40763A0094D368 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		540908DD1D40763A0094D368 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		540908DE1D40763A0094D368 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		540908E01D40763A0094D368 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		540908E11D40763A0094D368 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		540908E41D40763A0094D368 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		540908E61D40763A0094D368 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		540908E91D40763A0094D368 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,10 +55,15 @@
 		540908FB1D40763A0094D368 /* CameraSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		540908FF1D40763A0094D368 /* CameraSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraSampleUITests.m; sourceTree = "<group>"; };
 		540909011D40763A0094D368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5409090E1D4076960094D368 /* RCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCustomViewController.h; sourceTree = "<group>"; };
-		5409090F1D4076960094D368 /* RCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCustomViewController.m; sourceTree = "<group>"; };
-		540909111D407E290094D368 /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takephoto.png; sourceTree = "<group>"; };
-		540909131D407E370094D368 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		54FE5CCA1D47100800250961 /* RCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCustomViewController.h; sourceTree = "<group>"; };
+		54FE5CCB1D47100800250961 /* RCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCustomViewController.m; sourceTree = "<group>"; };
+		54FE5CCD1D47100800250961 /* autolight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autolight.png; sourceTree = "<group>"; };
+		54FE5CCE1D47100800250961 /* closelight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closelight.png; sourceTree = "<group>"; };
+		54FE5CCF1D47100800250961 /* openlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = openlight.png; sourceTree = "<group>"; };
+		54FE5CD01D47100800250961 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		54FE5CD11D47100800250961 /* takephoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takephoto.png; sourceTree = "<group>"; };
+		54FE5CD21D47100800250961 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		54FE5CD31D47100800250961 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,13 +114,12 @@
 		540908D91D40763A0094D368 /* CameraSample */ = {
 			isa = PBXGroup;
 			children = (
-				540909131D407E370094D368 /* shadow.png */,
-				540909111D407E290094D368 /* takephoto.png */,
-				5409090D1D4076960094D368 /* Camera */,
+				54FE5CC91D47100800250961 /* Camera */,
+				54FE5CCC1D47100800250961 /* Resources */,
+				54FE5CD21D47100800250961 /* ViewController.h */,
+				54FE5CD31D47100800250961 /* ViewController.m */,
 				540908DD1D40763A0094D368 /* AppDelegate.h */,
 				540908DE1D40763A0094D368 /* AppDelegate.m */,
-				540908E01D40763A0094D368 /* ViewController.h */,
-				540908E11D40763A0094D368 /* ViewController.m */,
 				540908E31D40763A0094D368 /* Main.storyboard */,
 				540908E61D40763A0094D368 /* Assets.xcassets */,
 				540908E81D40763A0094D368 /* LaunchScreen.storyboard */,
@@ -150,13 +155,25 @@
 			path = CameraSampleUITests;
 			sourceTree = "<group>";
 		};
-		5409090D1D4076960094D368 /* Camera */ = {
+		54FE5CC91D47100800250961 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				5409090E1D4076960094D368 /* RCustomViewController.h */,
-				5409090F1D4076960094D368 /* RCustomViewController.m */,
+				54FE5CCA1D47100800250961 /* RCustomViewController.h */,
+				54FE5CCB1D47100800250961 /* RCustomViewController.m */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		54FE5CCC1D47100800250961 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				54FE5CCD1D47100800250961 /* autolight.png */,
+				54FE5CCE1D47100800250961 /* closelight.png */,
+				54FE5CCF1D47100800250961 /* openlight.png */,
+				54FE5CD01D47100800250961 /* shadow.png */,
+				54FE5CD11D47100800250961 /* takephoto.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +280,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				540908EA1D40763A0094D368 /* LaunchScreen.storyboard in Resources */,
-				540909141D407E370094D368 /* shadow.png in Resources */,
-				540909121D407E290094D368 /* takephoto.png in Resources */,
+				54FE5CD61D47100800250961 /* closelight.png in Resources */,
+				54FE5CD81D47100800250961 /* shadow.png in Resources */,
+				54FE5CD51D47100800250961 /* autolight.png in Resources */,
 				540908E71D40763A0094D368 /* Assets.xcassets in Resources */,
+				54FE5CD71D47100800250961 /* openlight.png in Resources */,
 				540908E51D40763A0094D368 /* Main.storyboard in Resources */,
+				54FE5CD91D47100800250961 /* takephoto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,9 +311,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				540908E21D40763A0094D368 /* ViewController.m in Sources */,
-				540909101D4076960094D368 /* RCustomViewController.m in Sources */,
 				540908DF1D40763A0094D368 /* AppDelegate.m in Sources */,
+				54FE5CD41D47100800250961 /* RCustomViewController.m in Sources */,
+				54FE5CDA1D47100800250961 /* ViewController.m in Sources */,
 				540908DC1D40763A0094D368 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,6 +540,7 @@
 				540909061D40763A0094D368 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		540909071D40763A0094D368 /* Build configuration list for PBXNativeTarget "CameraSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +549,7 @@
 				540909091D40763A0094D368 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5409090A1D40763A0094D368 /* Build configuration list for PBXNativeTarget "CameraSampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +558,7 @@
 				5409090C1D40763A0094D368 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

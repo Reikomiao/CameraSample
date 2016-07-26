@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5J0-1p-05M">
-                                <rect key="frame" x="35" y="120" width="530" height="45"/>
+                                <rect key="frame" x="31" y="70" width="313" height="45"/>
                                 <color key="backgroundColor" red="0.39937506321687222" green="0.98145444509324453" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Jou-L4-kIy"/>
@@ -32,22 +32,21 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5VT-ol-R4d">
-                                <rect key="frame" x="150" y="185" width="300" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="2D1-9A-6w5"/>
-                                    <constraint firstAttribute="height" constant="300" id="Nj3-5p-63r"/>
-                                </constraints>
+                                <rect key="frame" x="31" y="135" width="313" height="512"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5VT-ol-R4d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6kO-yO-rhX"/>
+                            <constraint firstItem="5VT-ol-R4d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="3Hu-sN-cbh"/>
                             <constraint firstItem="5VT-ol-R4d" firstAttribute="top" secondItem="5J0-1p-05M" secondAttribute="bottom" constant="20" id="B0C-Ug-EdE"/>
-                            <constraint firstItem="5J0-1p-05M" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="FgC-Hy-OBp"/>
+                            <constraint firstItem="5J0-1p-05M" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="FgC-Hy-OBp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5J0-1p-05M" secondAttribute="trailing" constant="15" id="T3n-p6-rFU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5VT-ol-R4d" secondAttribute="bottom" constant="20" id="TXW-qy-x11"/>
                             <constraint firstItem="5J0-1p-05M" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="huh-Ty-Rqw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5VT-ol-R4d" secondAttribute="trailing" constant="15" id="u6T-8w-ovD"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="fileImage" destination="5VT-ol-R4d" id="vHy-OD-QAg"/>
                     </connections>
