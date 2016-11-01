@@ -38,6 +38,9 @@
 
 // 最后的缩放比例
 @property(nonatomic,assign)CGFloat effectiveScale;
+// 聚焦动画
+@property(nonatomic, strong) UIView   *focusView;
+
 @end
 
 @implementation RCustomViewController
@@ -58,8 +61,10 @@
   
     [self initAVCaptureSession];
     [self setUpGesture];
+    [self addFocusing];
     
 }
+
 // 布局
 - (void)addSubViews{
     UIView *backView = [[UIView alloc] init];
@@ -101,8 +106,18 @@
     [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeRight multiplier:1 constant:-5]];
     [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeHeight multiplier:0.8 constant:0]];
-    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]];
-    
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:flashLampButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50]];
+    // 对焦
+    UIButton *focusingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [focusingButton setTitle:@"对焦" forState:UIControlStateNormal];
+    focusingButton.translatesAutoresizingMaskIntoConstraints = NO;
+    focusingButton.userInteractionEnabled = YES;
+    [focusingButton addTarget:self action:@selector(actionfocusingButton:) forControlEvents:UIControlEventTouchUpInside];
+    [topImageView addSubview:focusingButton];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:focusingButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:focusingButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:flashLampButton attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:focusingButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:topImageView attribute:NSLayoutAttributeHeight multiplier:0.8 constant:0]];
+    [topImageView addConstraint:[NSLayoutConstraint constraintWithItem:focusingButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50]];
     // 右边的阴影部分
     UIImageView *leftImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shadow"]];
     leftImageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -182,7 +197,13 @@
     [takePhoneView addConstraint:[NSLayoutConstraint constraintWithItem:rotateButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:takePhoneButton attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
     [takePhoneView addConstraint:[NSLayoutConstraint constraintWithItem:rotateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50]];
    
-    
+    _focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    _focusView.layer.borderColor = [UIColor blueColor].CGColor;
+    _focusView.layer.borderWidth = 1.0f;
+    _focusView.backgroundColor = [UIColor clearColor];
+    _focusView.hidden = YES;
+    [self.view addSubview:_focusView];
+
    
 }
 // 初始化相机
@@ -261,14 +282,9 @@
             NSLog(@"==%@",error);
             
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-
-
-
+        [_session stopRunning];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
-//    sleep(1);// 这个为了显示效果,可以删除
 
 }
 // 闪光灯
@@ -394,6 +410,52 @@
     
 }
 
+// 自动对焦
+- (void)actionfocusingButton:(UIButton *)button{
+    [self runFocusAnimation:self.focusView point:self.view.center];
+   
+}
+- (void)addFocusing{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTapGesture:)];
+    [self.view addGestureRecognizer:tap];
+}
+- (void)actionTapGesture:(UIGestureRecognizer *)tap{
+    if ([self.videoInput.device isFocusPointOfInterestSupported]) {
+        CGPoint point = [tap locationInView:self.view];
+        [self runFocusAnimation:self.focusView point:point];
+        CGPoint focusPoint = [self.previewLayer captureDevicePointOfInterestForPoint:point];
+        [self focusAtPoint:focusPoint];
+        
+    }
+    
+}
+- (void)focusAtPoint:(CGPoint)point{
+    if ([self.videoInput.device isFocusPointOfInterestSupported] && [self.videoInput.device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+        NSError *error;
+        if ([self.videoInput.device lockForConfiguration:&error]) {
+            self.videoInput.device.focusPointOfInterest = point;
+            self.videoInput.device.focusMode = AVCaptureFocusModeAutoFocus;
+            [self.videoInput.device unlockForConfiguration];
+        }else{
+          
+        }
+    }
+}
+// 聚焦动画
+-(void)runFocusAnimation:(UIView *)view point:(CGPoint)point{
+    view.center = point;
+    view.hidden = NO;
+    [UIView animateWithDuration:0.15f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view.layer.transform = CATransform3DMakeScale(0.5, 0.5, 1.0);
+    }completion:^(BOOL complete) {
+        double delayInSeconds = 0.5f;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            view.hidden = YES;
+            view.transform = CGAffineTransformIdentity;
+        });
+    }];
+}
 
 - (void)viewDidDisappear:(BOOL)animated{
     

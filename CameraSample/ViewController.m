@@ -8,10 +8,13 @@
 
 #import "ViewController.h"
 #import "RCustomViewController.h"
-
-@interface ViewController ()<CustomViewControllerDelegate>
+#import "CustomView.h"
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+@interface ViewController ()<CustomViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *fileImage;
+@property (nonatomic, strong) CustomView *customView;
 
 
 @end
@@ -20,6 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.customView = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 400)];
+    
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -31,9 +37,15 @@
     RCustomViewController *customVC = [[RCustomViewController alloc] init];
     customVC.delegate = self;
     [self presentViewController:customVC animated:YES completion:nil];
+
+    
 #endif
 
+    
+
+
 }
+
 // 代理方法
 -(void)photoCapViewController:(UIViewController *)viewController didFinishDismissWithImage:(UIImage *)image{
     self.fileImage.image = image;

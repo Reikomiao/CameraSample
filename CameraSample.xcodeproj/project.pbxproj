@@ -14,6 +14,7 @@
 		540908EA1D40763A0094D368 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 540908E81D40763A0094D368 /* LaunchScreen.storyboard */; };
 		540908F51D40763A0094D368 /* CameraSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908F41D40763A0094D368 /* CameraSampleTests.m */; };
 		540909001D40763A0094D368 /* CameraSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 540908FF1D40763A0094D368 /* CameraSampleUITests.m */; };
+		542942BF1D741BDE00FAA801 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 542942BE1D741BDE00FAA801 /* CustomView.m */; };
 		54FE5CD41D47100800250961 /* RCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54FE5CCB1D47100800250961 /* RCustomViewController.m */; };
 		54FE5CD51D47100800250961 /* autolight.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CCD1D47100800250961 /* autolight.png */; };
 		54FE5CD61D47100800250961 /* closelight.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE5CCE1D47100800250961 /* closelight.png */; };
@@ -55,6 +56,8 @@
 		540908FB1D40763A0094D368 /* CameraSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		540908FF1D40763A0094D368 /* CameraSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraSampleUITests.m; sourceTree = "<group>"; };
 		540909011D40763A0094D368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		542942BD1D741BDE00FAA801 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		542942BE1D741BDE00FAA801 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
 		54FE5CCA1D47100800250961 /* RCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCustomViewController.h; sourceTree = "<group>"; };
 		54FE5CCB1D47100800250961 /* RCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCustomViewController.m; sourceTree = "<group>"; };
 		54FE5CCD1D47100800250961 /* autolight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autolight.png; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 			children = (
 				54FE5CCA1D47100800250961 /* RCustomViewController.h */,
 				54FE5CCB1D47100800250961 /* RCustomViewController.m */,
+				542942BD1D741BDE00FAA801 /* CustomView.h */,
+				542942BE1D741BDE00FAA801 /* CustomView.m */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				TargetAttributes = {
 					540908D61D40763A0094D368 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5AQGGJ35C4;
 					};
 					540908EF1D40763A0094D368 = {
 						CreatedOnToolsVersion = 7.3;
@@ -311,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				542942BF1D741BDE00FAA801 /* CustomView.m in Sources */,
 				540908DF1D40763A0094D368 /* AppDelegate.m in Sources */,
 				54FE5CD41D47100800250961 /* RCustomViewController.m in Sources */,
 				54FE5CDA1D47100800250961 /* ViewController.m in Sources */,
@@ -455,6 +462,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5AQGGJ35C4;
 				INFOPLIST_FILE = CameraSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -467,6 +475,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5AQGGJ35C4;
 				INFOPLIST_FILE = CameraSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
